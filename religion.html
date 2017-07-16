@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en-us">
+<head>
+  <meta charset="UTF-8">
+  <title>新北市教會</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="css/religion.css">
+
+  <script type="text/javascript" src="js/jquery-3.2.0.min.js"></script>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+</head>
+<body>
+  <div id="header">
+    <div class="banner">
+      <form class="form-set">
+        <h1>
+          新北市教會設立登記查詢
+        </h1>
+        <p>供市民查詢新北市各區教會基本資料</p>
+        <div class="select">
+          <select name="select-list" id="select-list" >
+            <option value disabled selected>--請選擇行政區--</option>
+            <option value="中和區">中和區</option>
+          </select>
+        </div>
+      </form>
+    </div> 
+  </div>
+  <div class="content">
+    <div id="googlemap">
+      <div id="map"></div>
+    </div>
+    <div id="data-list">
+      
+    </div>
+  </div>
+  <div id="footer"></div>
+  
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZCJtClohsTJebTcBm1fpRBOyfV3knCOg&callback=initMap">
+  </script>
+  <script type="text/javascript" src="js/religion.js"></script>	
+</body>
+</html>
