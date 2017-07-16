@@ -1,6 +1,6 @@
 var map;//記錄地圖
 var data = "";//記錄取得的資料
-var makers = [];//記錄載入的標記
+var markers = [];//記錄載入的標記
 var currentInfoWindow = '';//記錄載入的說明視窗
 
 //監聽select
@@ -23,26 +23,28 @@ function getData(){
   xhr.onload = function(){
   	data = JSON.parse(xhr.responseText);
   	for(var i = 0; i < data.length; i++){
-  		showmakers(data[i].wgs84aY,data[i].wgs84aX,data[i].CHR_Name);
+  		showmarkers(data[i].wgs84aY,data[i].wgs84aX,data[i].CHR_Name);
   	}
 
   }
 }
 
-function showmakers (lat,lng,title) {
+function showmarkers (lat,lng,title) {
   var infowindow = new google.maps.InfoWindow({
     content: title
   });
   var marker = new google.maps.Marker({
-    position: {lat: parseFloat(lat), lng: parseFloat(lng)},
+    position: {lat: parseFloat(lat), lng: parseFloat(lng)},//字串轉數字
     title: title,
     map: map,
   });
-  maker.addListener('click',function(){
+  marker.addListener('click',function(){
+    //將目前info關掉
   	if(currentInfoWindow != ''){
   		currentInfoWindow.close();   
       currentInfoWindow = '';   
   	}
+    //開起點擊的info
   	infowindow.open(map, marker);   
     currentInfoWindow = infowindow; 
   });
@@ -57,7 +59,20 @@ function  changeSelectList (e){
   infoWindows = [];
   for(var i = 0; i < data.length; i++){
     if(data[i].CHR_Area == e.target.value){
-      loadData(data[i].wgs84aY,data[i].wgs84aX,data[i].CHR_Name);
+      showmarkers(data[i].wgs84aY,data[i].wgs84aX,data[i].CHR_Name);
     }
   }
 }
+
+
+
+$(document).ready(function(){
+  $('#select-list').on('change', function(e){
+    $('#content').show();
+    //var target = e.target.dataset.target;
+    //var target = document.getElementById('select-list').dataset.target;
+    var target = $(this).attr('data-target'); 
+    var offset = $(target).offset();
+    $('html,body').animate({scrollTop : offset.top}, 1500);
+  });
+});

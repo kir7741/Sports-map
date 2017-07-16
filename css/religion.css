@@ -59,12 +59,16 @@ img {
   height: 50px;
 }
 
-/*content*/
+/*#content*/
+#content {
+  display: none;
+}
 #googlemap {
   margin: 0 auto;
   padding-top: 80px;
   width: 80%;
 }
+
 
 #map {
   margin: 0 auto;
