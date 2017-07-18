@@ -22,7 +22,35 @@
         <div class="select">
           <select name="select-list" id="select-list" data-target="#map">
             <option value disabled selected>--請選擇行政區--</option>
+            <option value="萬里區">萬里區</option>
+            <option value="金山區">金山區</option>
+            <option value="板橋區">板橋區</option>
+            <option value="汐止區">汐止區</option>
+            <option value="深坑區">深坑區</option>
+            <option value="石碇區">石碇區</option>
+            <option value="瑞芳區">瑞芳區</option>
+            <option value="平溪區">平溪區</option>
+            <option value="雙溪區">雙溪區</option>
+            <option value="貢寮區">貢寮區</option>
+            <option value="新店區">新店區</option>
+            <option value="坪林區">坪林區</option>
+            <option value="烏來區">烏來區</option>
+            <option value="永和區">永和區</option>
             <option value="中和區">中和區</option>
+            <option value="土城區">土城區</option>
+            <option value="三峽區">三峽區</option>
+            <option value="樹林區">樹林區</option>
+            <option value="鶯歌區">鶯歌區</option>
+            <option value="三重區">三重區</option>
+            <option value="新莊區">新莊區</option>
+            <option value="泰山區">泰山區</option>
+            <option value="林口區">林口區</option>
+            <option value="蘆洲區">蘆洲區</option>
+            <option value="五股區">五股區</option>
+            <option value="八里區">八里區</option>
+            <option value="淡水區">淡水區</option>
+            <option value="三芝區">三芝區</option>
+            <option value="石門區">石門區</option>
           </select>
         </div>
       </form>
@@ -33,13 +61,24 @@
       <div id="map"></div>
     </div>
     <div id="data-list">
-      
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>行政區</th>
+            <th>教會名稱</th>
+            <th>教會地址</th>
+          </tr>
+        </thead>
+        <tbody class="js-tbody">
+        </tbody>
+      </table>
     </div>
   </div>
   <div id="footer"></div>
+
   
   <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBZCJtClohsTJebTcBm1fpRBOyfV3knCOg&callback=initMap">
   </script>
-  <script type="text/javascript" src="js/religion.js"></script>	
+  <script type="text/javascript" src="js/religion.js"></script>
 </body>
 </html>
