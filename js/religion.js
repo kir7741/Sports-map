@@ -1,11 +1,11 @@
 var map;//記錄地圖
 var data = "";//記錄取得的資料
 var markers = [];//記錄載入的標記
-var tableData = [];//記錄載入的表單資料
 var currentInfoWindow = '';//記錄載入的說明視窗
+var tableData = [];//記錄載入的表單資料
+var latlng = "";
 
 //監聽select
-var tbody = document.querySelector('.js-tbody');
 var selectList = document.querySelector('#select-list');
 selectList.addEventListener('change', changeSelectList, false);
 
@@ -17,7 +17,7 @@ function initMap() {
   });
   getData();
 }
-//取得資料並在此函數裡執行標記
+//取得資料並在此函數裡產生標記
 function getData(){
   var xhr = new XMLHttpRequest();
   xhr.open('get', 'https://raw.githubusercontent.com/kir7741/religion-map/gh-pages/str/religion.json');
@@ -54,26 +54,30 @@ function showmarkers (lat,lng,title) {
   markers.push(marker);
 }
 
-//Select改變時，更新標記與表單資料
+//Select改變時，清空標記與表單資料後更新
 function  changeSelectList (e){
 	for(var i = 0; i < markers.length; i++){
     markers[i].setMap(null);   
   }
+  //
   markers = []; 
   infoWindows = [];
+  tableData = [];
+
   for(var i = 0; i < data.length; i++){
     if(data[i].CHR_Area == e.target.value){
       showmarkers(data[i].wgs84aY,data[i].wgs84aX,data[i].CHR_Name);
+      latlng = {lat: parseFloat(data[i].wgs84aY), lng: parseFloat(data[i].wgs84aX)};
       var dict = {
         area : data[i].CHR_Area,
         name : data[i].CHR_Name,
         address : data[i].CHR_Address
       }
       tableData.push(dict);
-      console.log(tableData);
       updateTable(tableData);
     }
   }
+  //console.log(tableData);
 }
 
 function updateTable (items) {
@@ -81,7 +85,7 @@ function updateTable (items) {
   for (var i = 0; i < items.length; i++){
     str += '<tr><td>' + items[i].area + '</td><td>' + items[i].name + '</td><td>' + items[i].address + '</td></tr>'
   }
-  console.log(tbody);
+  var tbody = document.querySelector('.js-tbody');
   tbody.innerHTML = str;
 }
 
@@ -92,11 +96,25 @@ $(document).ready(function(){
   $('#select-list').on('change', function(e){
     $('#content').show();
     google.maps.event.trigger(map, 'resize');
-    map.setCenter({lat: 25.0756191, lng: 121.5788063});
+    map.setCenter(latlng);
+    $('#footer').show();
     //var target = e.target.dataset.target;
     //var target = document.getElementById('select-list').dataset.target;
     var target = $(this).attr('data-target'); 
     var offset = $(target).offset();
+    $('html,body').animate({scrollTop : offset.top}, 1000);
+  });
+  $(window).scroll(function(){
+    if($(window).scrollTop() > 800){
+      $('#goTop').show();
+    }else{
+      $('#goTop').hide();
+    }
+  });
+  $('#goTop').click(function(e){
+    e.preventDefault();
+    var target = $(this).attr('data-target'); 
+    var offset =  $(target).offset();
     $('html,body').animate({scrollTop : offset.top}, 1000);
   });
 });
